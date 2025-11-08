@@ -35,7 +35,7 @@
     "IsFlagArgument": false,
     "ParamFieldName": "",
     "IncludeInCommandLine": false,
-    "DefaultValue": "8080",
+    "DefaultValue": "8081",
     "EnumValues": {}
   },
   {
