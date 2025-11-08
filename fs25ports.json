@@ -1,0 +1,16 @@
+{
+  "Ports": [
+    {
+      "Name": "ServerPort",
+      "Port": 10823,
+      "Protocol": "Both",
+      "Description": "Game connection port"
+    },
+    {
+      "Name": "WebPort",
+      "Port": 8081,
+      "Protocol": "TCP",
+      "Description": "Web admin interface"
+    }
+  ]
+}
