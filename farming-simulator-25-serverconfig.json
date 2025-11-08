@@ -1,0 +1,15 @@
+[
+    {
+        "DisplayName": "Farming Simulator 25",
+        "Category": "Generic",
+        "Description": "Dedicated server for Farming Simulator 25 hosted on Linux via Wine",
+        "Keywords": "",
+        "FieldName": "",
+        "InputType": "text",
+        "IsFlagArgument": false,
+        "ParamFieldName": "",
+        "IncludeInCommandLine": true,
+        "DefaultValue": "",
+        "EnumValues": {}
+    }
+]
