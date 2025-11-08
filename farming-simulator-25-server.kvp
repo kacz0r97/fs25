@@ -1,35 +1,91 @@
-App.AdminMethod=STDIO
-App.ApplicationPort1=8081
-App.ApplicationPort2=10823
-App.ApplicationReadyMode=Immediate
-App.BaseDirectory=./farming-simulator-25-server/2300320/
-App.CommandLineArgs=+ip {{$ApplicationIPBinding}} +port {{$ApplicationPort1}} +queryport {{$ApplicationPort2}} +rconpassword "{{$RemoteAdminPassword}}" +maxusers {{$MaxUsers}} {{$FormattedArgs}}
-App.CommandLineParameterDelimiter= 
-App.CommandLineParameterFormat=-{0} "{1}"
-App.DisplayName=Farming Simulator 25 Server
-App.EnvironmentVariables={"LD_LIBRARY_PATH": "./linux64:%LD_LIBRARY_PATH%", "SteamAppId": "2300320"}
-App.ExecutableLinux=2300320/wine dedicatedServer.exe
-App.ExecutableWin=2300320\dedicatedServer.exe
-App.ExitMethod=SIGTERM
-App.ExitString=stop
-App.HasReadableConsole=true
-App.HasWritableConsole=true
-App.RapidStartup=false
-App.RootDir=./farming-simulator-25-server/
-App.UpdateSource=Multi
-App.UpdateSources=[{"UpdateStageName": "SteamCMD Download","UpdateSourcePlatform": "All", "UpdateSource": "SteamCMD", "UpdateSourceData": "2300320"}]
-App.WorkingDir=2300320
-Console.AppReadyRegex=^Server is ready.$
-Console.ThrowawayMessageRegex=^(WARNING|ERROR): Shader.+$
-Console.UserChatRegex=^(?<username>.+?): (?<message>.+)$
-Console.UserJoinRegex=^User (?<username>.+?) \((?<userid>-?d+)\) connected from \[::ffff:(?<endpoint>.+?)\]$
-Console.UserLeaveRegex=^User (?<username>.+?) \((?<userid>-?d+)\) disconnected\. Reason: (.+?)$
-Meta.Author=kacz0r_97
-Meta.ConfigManifest=farming-simulator-25-serverconfig.json
-Meta.ConfigRoot=farming-simulator-25-server.kvp
-Meta.Description=Dedicated server for Farming Simulator 25
+Meta.DisplayName=Farming Simulator 25
+Meta.Description=Farming Simulator 25 Dedicated Server (via Wine/Proton)
+Meta.OS=Windows, Linux
+Meta.AarchSupport=Unknown
+Meta.Arch=x86_64
+Meta.Author=Giants Software / Custom
+Meta.URL=https://www.farming-simulator.com/
 Meta.DisplayImageSource=steam:2300320
-Meta.DisplayName=Farming Simulator 25 Server
-Meta.EndpointURIFormat=
-Meta.OS=3
-Meta.URL=ttps://www.giants-software.com/farming-simulator-25
+Meta.EndpointURIFormat={ip}:{GenericModule.App.Ports.$ServerPort}
+Meta.ConfigManifest=fs25config.json
+Meta.MetaConfigManifest=fs25metaconfig.json
+Meta.ConfigRoot=fs25.kvp
+Meta.MinAMPVersion=2.6.0.0
+Meta.SpecificDockerImage=cubecoders/ampbase:debian
+Meta.DockerRequired=False
+Meta.ContainerPolicy=Supported
+Meta.ContainerPolicyReason=
+Meta.ConfigReleaseState=Stable
+Meta.ConfigVersion=1
+Meta.ReleaseNotes=Initial custom support for FS25 server via Wine.
+Meta.AppConfigId=dedicated-fs25-0001
+Meta.ImportableExtensions=[".xml",".ini",".json",".kvp"]
+Meta.AppIsMultiIPAware=False
+
+App.DisplayName=Farming Simulator 25
+App.RootDir=./fs25/
+App.BaseDirectory=./fs25/
+App.SteamWorkshopDownloadLocation=
+App.ExecutableWin=FarmingSimulator25Server.exe
+App.ExecutableLinux=.proton/proton
+App.WorkingDir=fs25
+App.LinuxCommandLineArgs=runinprefix "{{$FullBaseDir}}FarmingSimulator25Server.exe"
+App.WindowsCommandLineArgs=
+App.CommandLineArgs={{$PlatformArgs}} -port={{$ServerPort}} -servername="{{ServerName}}" {{$FormattedArgs}}
+App.UseLinuxIOREDIR=False
+
+App.AppSettings={}
+App.EnvironmentVariables={"SteamAppId":"2300320","STEAM_COMPAT_DATA_PATH":"{{$FullRootDir}}.proton/compatdata","STEAM_COMPAT_CLIENT_INSTALL_PATH":"{{$FullBaseDir}}.steam/steam","HOME":"{{$FullBaseDir}}","XDG_RUNTIME_DIR":"/tmp"}
+
+App.CommandLineParameterFormat=-{0}={1}
+App.CommandLineParameterDelimiter= 
+App.ExitMethod=OS_CLOSE
+App.ExitTimeout=30
+App.ExitString=stop
+App.ExitFile=fs25_exit.lck
+
+App.HasWriteableConsole=True
+App.HasReadableConsole=True
+App.UDPLogger=False
+App.SupportsLiveSettingsChanges=False
+App.LiveSettingChangeCommandFormat=set {0} "{1}"
+
+App.ForceIPBinding=False
+App.SupportsIPv6=False
+App.ApplicationIPBinding=0.0.0.0
+
+App.Ports=@IncludeJson[fs25ports.json]
+App.AdminPortRef=0
+App.PrimaryApplicationPortRef=ServerPort
+App.MaxUsers=16
+App.UseRandomAdminPassword=False
+App.RemoteAdminPassword=
+App.AdminMethod=TailLogFile
+
+App.TailLogFilePath={{$FullBaseDir}}log.txt
+App.UpdateSources=@IncludeJson[fs25updates.json]
+
+App.ForceUpdate=False
+App.Compatibility=None
+App.SteamUpdateAnonymousLogin=True
+App.SteamForceLoginPrompt=False
+App.RapidStartup=False
+App.SmartExcludeSupported=True
+
+App.DumpFullChildProcessTree=False
+App.MonitorChildProcessName=^.*{{$WineBaseDir}}FarmingSimulator25Server\.exe.*-port={{$ServerPort}}.*$
+App.MonitorDirectChildOnly=False
+
+Console.FilterMatchRegex=
+Console.FilterMatchReplacement=
+Console.ThrowawayMessageRegex=^.*(Shader|Warning).*$
+
+Console.AppReadyRegex=^.*Dedicated Server initialized successfully.*$
+Console.UserJoinRegex=^.*Player connected: (?<username>.*)$
+Console.UserLeaveRegex=^.*Player disconnected: (?<username>.*)$
+Console.ServerInfoRegex=^.*Server name: (?<servername>.*)$
+
+Limits.SleepMode=False
+Limits.SleepDelayMinutes=5
+Limits.DozeDelay=2
+Limits.AutoRetryCount=2
