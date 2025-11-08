@@ -1,15 +1,83 @@
 [
-    {
-        "DisplayName": "Farming Simulator 25",
-        "Category": "Generic",
-        "Description": "Dedicated server for Farming Simulator 25 hosted on Linux via Wine",
-        "Keywords": "",
-        "FieldName": "",
-        "InputType": "text",
-        "IsFlagArgument": false,
-        "ParamFieldName": "",
-        "IncludeInCommandLine": true,
-        "DefaultValue": "",
-        "EnumValues": {}
+  {
+    "DisplayName": "Server Name",
+    "Category": "General",
+    "Description": "Displayed name of your Farming Simulator 25 server",
+    "Keywords": "name",
+    "FieldName": "ServerName",
+    "InputType": "text",
+    "IsFlagArgument": true,
+    "ParamFieldName": "servername",
+    "IncludeInCommandLine": true,
+    "DefaultValue": "My FS25 Server",
+    "EnumValues": {}
+  },
+  {
+    "DisplayName": "Server Port",
+    "Category": "Networking",
+    "Description": "Port used for player connections",
+    "Keywords": "port",
+    "FieldName": "ServerPort",
+    "InputType": "number",
+    "IsFlagArgument": true,
+    "ParamFieldName": "port",
+    "IncludeInCommandLine": true,
+    "DefaultValue": "10823",
+    "EnumValues": {}
+  },
+  {
+    "DisplayName": "Web Admin Port",
+    "Category": "Networking",
+    "Description": "Port used for the web admin interface",
+    "Keywords": "web,admin",
+    "FieldName": "WebPort",
+    "InputType": "number",
+    "IsFlagArgument": false,
+    "ParamFieldName": "",
+    "IncludeInCommandLine": false,
+    "DefaultValue": "8080",
+    "EnumValues": {}
+  },
+  {
+    "DisplayName": "Admin Password",
+    "Category": "Security",
+    "Description": "Password for the in-game admin access",
+    "Keywords": "admin,password",
+    "FieldName": "AdminPassword",
+    "InputType": "password",
+    "IsFlagArgument": false,
+    "ParamFieldName": "",
+    "IncludeInCommandLine": false,
+    "DefaultValue": "",
+    "EnumValues": {}
+  },
+  {
+    "DisplayName": "Max Players",
+    "Category": "Gameplay",
+    "Description": "Maximum number of players allowed on the server",
+    "Keywords": "players,slots",
+    "FieldName": "MaxPlayers",
+    "InputType": "number",
+    "IsFlagArgument": true,
+    "ParamFieldName": "slots",
+    "IncludeInCommandLine": true,
+    "DefaultValue": "16",
+    "EnumValues": {}
+  },
+  {
+    "DisplayName": "Map",
+    "Category": "Gameplay",
+    "Description": "Which map to load (e.g. mapUS or mapEU)",
+    "Keywords": "map,world",
+    "FieldName": "Map",
+    "InputType": "text",
+    "IsFlagArgument": true,
+    "ParamFieldName": "map",
+    "IncludeInCommandLine": true,
+    "DefaultValue": "mapUS",
+    "EnumValues": {
+      "mapUS": "American Map",
+      "mapEU": "European Map"
     }
+  }
 ]
