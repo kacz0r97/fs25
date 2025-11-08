@@ -1,0 +1,8 @@
+{
+  "UpdateSources": [
+    {
+      "Type": "Manual",
+      "Description": "Manual installation (copy FS25 server files to instance folder)."
+    }
+  ]
+}
